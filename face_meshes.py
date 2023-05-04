@@ -1,3 +1,5 @@
+# https://www.youtube.com/watch?v=yvXPKfil1hY&ab_channel=Koolac
+
 import mediapipe as mp
 import cv2
 
