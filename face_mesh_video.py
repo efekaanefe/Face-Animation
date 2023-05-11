@@ -1,4 +1,3 @@
-# https://www.youtube.com/watch?v=yvXPKfil1hY&ab_channel=Koolac
 import dlib 
 import cv2
 
