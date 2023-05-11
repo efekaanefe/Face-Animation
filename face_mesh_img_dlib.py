@@ -3,7 +3,7 @@ import cv2
 import matplotlib.pyplot as plt
 import dlib
 
-img = cv2.imread("messi.jpg")
+img = cv2.imread("messi2.jpg")
 
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) 
 
@@ -26,8 +26,8 @@ for i in range(68):
     x = landmarks.part(i).x
     y = landmarks.part(i).y
     landmark_points.append((x, y))
-    print(x, y)
+    plt.plot(x,y,marker = "o", color="white")
 
-# plt.imshow(img)
-# plt.show()
+plt.imshow(img)
+plt.show()
 
