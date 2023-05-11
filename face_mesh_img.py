@@ -24,12 +24,10 @@ predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
 
 # Detect faces in the grayscale image
 faces = detector(gray, 0)
-# print(faces)
 # Loop over each face
 for face in faces:
     # Use the predictor to find facial landmarks
     landmarks = predictor(gray, face)
-# print(landmarks)
 
 # Loop over the landmark points and extract their (x, y) coordinates
 landmark_points = []
