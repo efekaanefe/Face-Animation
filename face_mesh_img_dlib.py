@@ -31,11 +31,3 @@ for i in range(68):
 # plt.imshow(img)
 # plt.show()
 
-# if cv2.waitKey(1) & 0xFF == ord('q'):
-#     cv2.destroyAllWindows()
-
-# cv2.imshow("webcam", img)
-# cv2.waitKey(0)
-# cv2.destroyAllWindows()
-# print("hello")
-
