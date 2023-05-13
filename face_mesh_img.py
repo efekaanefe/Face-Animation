@@ -2,7 +2,7 @@ import cv2
 import matplotlib.pyplot as plt
 import dlib
 import os
-
+import numpy as np
 
 green = (0,255,0)
 blue = (0,0,255)
@@ -62,6 +62,13 @@ cv2.line(img, landmark_points[48], landmark_points[59], red, 5)
 draw_facial_part(img, landmark_points, 60, 68, red)
 cv2.line(img, landmark_points[60], landmark_points[67], red, 5)
 
+# draw_polygons
+right_eye = np.array(landmark_points[36:42])#.append(landmark_points[37])
+print(right_eye)
+cv2.fillPoly(img, pts = [right_eye], color=red)
+
+polygon_points = np.array([(50, 50), (200, 50), (200, 200), (50, 200)], dtype=np.int32)
+cv2.fillPoly(img, [polygon_points], (0, 0, 255))
 
 plt.imshow(img)
 plt.show()
