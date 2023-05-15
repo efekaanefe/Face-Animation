@@ -42,9 +42,9 @@ draw_facial_part(img, landmark_points, 1, 9)
 # left jawline
 draw_facial_part(img, landmark_points, 8, 17)
 # right eyebrow
-draw_facial_part(img, landmark_points, 17, 22, blue)
+draw_facial_part(img, landmark_points, 17, 22, blue, thic=15)
 # left eyebrow
-draw_facial_part(img, landmark_points, 22, 27, blue)
+draw_facial_part(img, landmark_points, 22, 27, blue, thic=15)
 # nose vertical
 draw_facial_part(img, landmark_points, 27, 31, blue)
 # nose horizontal
@@ -63,9 +63,19 @@ draw_facial_part(img, landmark_points, 60, 68, red)
 cv2.line(img, landmark_points[60], landmark_points[67], red, 5)
 
 # draw_polygons
-right_eye = np.array(landmark_points[36:42])#.append(landmark_points[37])
-print(right_eye)
+right_eye = np.array(landmark_points[36:42])
 cv2.fillPoly(img, pts = [right_eye], color=red)
+
+left_eye = np.array(landmark_points[42:48])
+cv2.fillPoly(img, pts = [left_eye], color=red)
+
+outer_lip = np.array(landmark_points[48:60])
+cv2.fillPoly(img, pts = [outer_lip], color=red)
+
+inner_lip = np.array(landmark_points[60:68])
+cv2.fillPoly(img, pts = [inner_lip], color=blue)
+
+
 
 polygon_points = np.array([(50, 50), (200, 50), (200, 200), (50, 200)], dtype=np.int32)
 cv2.fillPoly(img, [polygon_points], (0, 0, 255))
