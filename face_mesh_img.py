@@ -6,12 +6,30 @@ import numpy as np
 
 green = (0,255,0)
 blue = (0,0,255)
-red = (255,0,0
-        )
-def draw_facial_part(img, landmarks, start, end, color = green, thic = 5):
+red = (255,0,0)
+
+thin_thic = 5
+thick_thic = 15
+
+landmark_indices_dict = {  # (start, end, color, thic)
+            "right_jawline": (1,9, green, thin_thic),
+            "left_jawline": (8,17, green, thin_thic),
+            "right_eyebrow": (17,22, blue, thick_thic),
+            "left_eyebrow": (22,27, blue, thick_thic),
+            "nose": (27,36, blue, thin_thic),
+            "right_eye": (36,42, red, thin_thic),
+            "left_eye": (42,48, red, thin_thic),
+            "outer_lip": (48,60, red, thin_thic),
+            "inner_lip": (60,68, blue, thin_thic)
+        }
+
+def draw_landmark_lines(img, landmarks, start, end, color = green, thic = 5):
     for i in range(start, end-1):
         cv2.line(img, landmarks[i], landmarks[i+1], color, thic)
 
+def draw_landmark_polygons(img, landmark_points, start, end, color):
+    positions = np.array(landmark_points[start:end])
+    cv2.fillPoly(img, pts = [positions], color=color)
 
 path = os.path.join('images' ,'messi2.jpg')
 
@@ -36,49 +54,13 @@ for i in range(68):
     y = landmarks.part(i).y
     landmark_points.append((x, y))
 
-
-# right jawline
-draw_facial_part(img, landmark_points, 1, 9)
-# left jawline
-draw_facial_part(img, landmark_points, 8, 17)
-# right eyebrow
-draw_facial_part(img, landmark_points, 17, 22, blue, thic=15)
-# left eyebrow
-draw_facial_part(img, landmark_points, 22, 27, blue, thic=15)
-# nose vertical
-draw_facial_part(img, landmark_points, 27, 31, blue)
-# nose horizontal
-draw_facial_part(img, landmark_points, 31, 36, blue)
-# right eye
-draw_facial_part(img, landmark_points, 36, 42, red)
-cv2.line(img, landmark_points[36], landmark_points[41], red, 5)
-# left eye
-draw_facial_part(img, landmark_points, 42, 48, red)
-cv2.line(img, landmark_points[42], landmark_points[47], red, 5)
-# outer lip
-draw_facial_part(img, landmark_points, 48, 60, red)
-cv2.line(img, landmark_points[48], landmark_points[59], red, 5)
-# inner lip
-draw_facial_part(img, landmark_points, 60, 68, red)
-cv2.line(img, landmark_points[60], landmark_points[67], red, 5)
-
-# draw_polygons
-right_eye = np.array(landmark_points[36:42])
-cv2.fillPoly(img, pts = [right_eye], color=red)
-
-left_eye = np.array(landmark_points[42:48])
-cv2.fillPoly(img, pts = [left_eye], color=red)
-
-outer_lip = np.array(landmark_points[48:60])
-cv2.fillPoly(img, pts = [outer_lip], color=red)
-
-inner_lip = np.array(landmark_points[60:68])
-cv2.fillPoly(img, pts = [inner_lip], color=blue)
-
-
-
-polygon_points = np.array([(50, 50), (200, 50), (200, 200), (50, 200)], dtype=np.int32)
-cv2.fillPoly(img, [polygon_points], (0, 0, 255))
+for key, value in landmark_indices_dict.items():
+    start, end, color, thic = value
+    # drawing lines
+    draw_landmark_lines(img, landmark_points, start, end, color, thic)
+    # drawing_polygons
+    if key in ["right_eye", "left_eye", "inner_lip", "outer_lip"]:
+        draw_landmark_polygons(img, landmark_points, start, end, color)
 
 plt.imshow(img)
 plt.show()
