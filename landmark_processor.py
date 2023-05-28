@@ -34,6 +34,7 @@ class LandmarkProcessor:
             # drawing_polygons
             if key in ["right_eye", "left_eye", "inner_lip", "outer_lip"]:
                 self.draw_polygons(img, self.landmark_points, start, end, color)
+        print(self.landmark_points)
 
     def get_landmark_points(self, img):
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) 
