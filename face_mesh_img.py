@@ -1,7 +1,5 @@
 import cv2
 import matplotlib.pyplot as plt
-import dlib
-import os
 from landmark_processor import LandmarkProcessor
 
 landmark_processor = LandmarkProcessor()
